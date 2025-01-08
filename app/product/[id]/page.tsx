@@ -9,7 +9,7 @@ function ProductDetails() {
       <div className="grid md:grid-cols-2 gap-8">
         <Card className="border-0 shadow-none">
           <CardContent className="p-0">
-            <div className="relative aspect-square">
+            <div className="relative aspect-square border border-gray-200 rounded-lg">
               <Image
                 src="/placeholder-image.jpg"
                 alt="Product image"

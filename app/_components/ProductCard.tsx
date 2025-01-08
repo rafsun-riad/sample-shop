@@ -8,7 +8,7 @@ import Link from "next/link";
 function ProductCard() {
   return (
     <div>
-      <Card className={cn("max-w-80 overflow-hidden")}>
+      <Card className={cn("max-w-80 overflow-hidden shadow-md")}>
         <CardContent className={cn("px-0 pb-0 relative")}>
           <Image
             src="/placeholder-image.jpg"
