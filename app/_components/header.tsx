@@ -64,9 +64,17 @@ function Header() {
           </div>
           <div>
             {user?.name ? (
-              <p className="px-3 py-1.5 rounded-md bg-white text-gray-500">
-                Hello, {user.name}
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="px-3 py-1.5 rounded-md bg-white text-gray-500">
+                  Hello, {user.name}
+                </p>
+                <Button
+                  asChild
+                  className={cn("bg-lime-700 px-8 hover:bg-lime-700/70")}
+                >
+                  <Link href="/product/add">Add Product</Link>
+                </Button>
+              </div>
             ) : (
               <Button
                 asChild
