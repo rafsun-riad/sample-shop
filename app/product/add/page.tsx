@@ -24,9 +24,15 @@ export default function ProductAddPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     formData.append("image", image || "");
-    formData.append("userId", user.id);
-    const product = await createProduct(formData);
-    console.log(product);
+
+    const product = await createProduct({
+      userId: user.id,
+      name: formData.get("name"),
+      description: formData.get("description"),
+      price: Number(formData.get("price")),
+      quantity: Number(formData.get("quantity")),
+    });
+    router.push("/");
   }
 
   return (

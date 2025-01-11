@@ -2,8 +2,11 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { getProduct } from "@/app/_service/apiService";
 
-function ProductDetails() {
+async function ProductDetails({ params }) {
+  const { id } = await params;
+  const product = await getProduct(id);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8">
@@ -23,15 +26,14 @@ function ProductDetails() {
 
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-semibold mb-2">Product 1 Title</h1>
-            <p className="text-2xl font-bold text-red-500">${"17.00"}</p>
-            <p className="text-lg text-gray-600">Available Quantity: 10</p>
+            <h1 className="text-3xl font-semibold mb-2">{product.name}</h1>
+            <p className="text-2xl font-bold text-red-500">${product.price}</p>
+            <p className="text-lg text-gray-600">
+              Available Quantity: {product.quantity}
+            </p>
           </div>
 
-          <p className="text-gray-600">
-            Sample text. Lorem ipsum dolor sit amet, consectetur adipiscing elit
-            nullam nunc justo sagittis suscipit ultrices.
-          </p>
+          <p className="text-gray-600">{product.description}</p>
 
           <Button
             className={cn("w-full md:w-auto px-8 hover:bg-gray-700")}

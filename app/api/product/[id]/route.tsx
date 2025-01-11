@@ -1,5 +1,20 @@
 import { prisma } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const { id } = await params;
+    const product = await prisma.product.findUnique({
+      where: { id: id },
+    });
+    return NextResponse.json({ product }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: err.message }, { status: 500 });
+  }
+}
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }

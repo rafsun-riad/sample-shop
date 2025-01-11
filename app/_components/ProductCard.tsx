@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function ProductCard({ products }) {
   return (
-    <div>
+    <div className="grid grid-cols-5 gap-3">
       {products.map((product) => (
         <Card
           key={product.id}
