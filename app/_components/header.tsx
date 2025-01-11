@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { House, ScrollText, Phone, ShoppingCart } from "lucide-react";
 import {
@@ -8,8 +10,10 @@ import {
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useUserStore } from "@/store";
 
 function Header() {
+  const { user } = useUserStore((state) => state);
   return (
     <div className=" bg-slate-700 min-w-full py-5 fixed top-0 z-50 shadow-md">
       <div className="flex items-center container mx-auto justify-between">
@@ -59,12 +63,18 @@ function Header() {
             </Link>
           </div>
           <div>
-            <Button
-              asChild
-              className={cn("bg-lime-700 px-8 hover:bg-lime-700/70")}
-            >
-              <Link href="/login">Sign In</Link>
-            </Button>
+            {user?.name ? (
+              <p className="px-3 py-1.5 rounded-md bg-white text-gray-500">
+                Hello, {user.name}
+              </p>
+            ) : (
+              <Button
+                asChild
+                className={cn("bg-lime-700 px-8 hover:bg-lime-700/70")}
+              >
+                <Link href="/login">Sign In</Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>

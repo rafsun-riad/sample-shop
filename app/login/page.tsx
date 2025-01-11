@@ -15,15 +15,22 @@ import {
 } from "@/components/ui/card";
 import { ShoppingBag, Lock } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { login } from "../_service/apiService";
+import { useUserStore } from "@/store";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const { user, userLogin } = useUserStore((state) => state);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Login attempted with:", { username, password });
-  };
+    const userData = await login({ email, password });
+    userLogin(userData);
+    if (userData?.name) router.push("/");
+  }
 
   return (
     <div className=" container mx-auto my-10">
@@ -42,12 +49,12 @@ export default function LoginForm() {
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="username">Username</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
-                    id="username"
-                    placeholder="johndoe"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    id="email"
+                    placeholder="email@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
