@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+For user register send POST request [User Register](http://localhost:3000/api/user/register) provide name, email, password
+
+For user login send POST request [User Login](http://localhost:3000/api/user/login) provide email, password
+
+For getting all the products send GET request [Products](http://localhost:3000/api/product)
+
+For creating a product send POST request[Product Create](http://localhost:3000/api/product) prodvide name, description, price, quantity, userId
+
+For updating product send PUT request [Product Update](http://localhost:3000/api/product/:id) prodvide product id in the url and data to body name, description, price, quantity, userId
+
+For deleting product send DELETE request [Product Update](http://localhost:3000/api/product/:id)
