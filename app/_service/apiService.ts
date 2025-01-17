@@ -11,6 +11,15 @@ export async function login(data) {
   }
 }
 
+export async function register(data) {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/user/register`, data);
+    return response.data.user;
+  } catch (error) {
+    throw new Error(`Failed to register: ${error.message}`);
+  }
+}
+
 export async function getProducts() {
   try {
     const response = await axios.get(`${BASE_URL}/api/product`);
