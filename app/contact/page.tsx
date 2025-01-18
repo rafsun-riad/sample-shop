@@ -12,11 +12,20 @@ function ContactPage() {
       <form className="space-y-6 mx-auto w-full max-w-lg">
         <div className="grid w-full max-w-lg items-center gap-1.5">
           <Label htmlFor="email">Email</Label>
-          <Input type="email" id="email" placeholder="Enter Your Email" />
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter Your Email"
+          />
         </div>
         <div className="grid w-full gap-1.5">
           <Label htmlFor="message-2">Your Message</Label>
-          <Textarea placeholder="Type your message here." id="message-2" />
+          <Textarea
+            placeholder="Type your message here."
+            id="message-2"
+            name="message"
+          />
           <p className="text-sm text-muted-foreground">
             Your message will be copied to the support team.
           </p>
