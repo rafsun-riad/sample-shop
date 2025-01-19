@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useCartStore, useUserStore } from "@/store";
 
 function Header() {
-  const { user } = useUserStore((state) => state);
+  const { user, userLogout } = useUserStore((state) => state);
   const cart = useCartStore((state) => state.cart);
   return (
     <div className=" bg-slate-700 min-w-full py-5 fixed top-0 z-50 shadow-md">
@@ -66,14 +66,22 @@ function Header() {
             </Link>
           </div>
           <div>
-            {user?.name ? (
+            {user ? (
               <div className="flex items-center gap-2">
-                <p className="px-3 py-1.5 rounded-md bg-white text-gray-500">
+                <p className="px-3 py-2 rounded-md bg-white text-gray-500">
                   Hello, {user.name}
                 </p>
+
+                <Button
+                  className={cn("text-black px-3 py-1.5")}
+                  variant="outline"
+                  onClick={() => userLogout()}
+                >
+                  Logout
+                </Button>
                 <Button
                   asChild
-                  className={cn("bg-lime-700 px-8 hover:bg-lime-700/70")}
+                  className={cn("bg-lime-700 px-3 hover:bg-lime-700/70 py-1.5")}
                 >
                   <Link href="/product/add">Add Product</Link>
                 </Button>
@@ -81,7 +89,7 @@ function Header() {
             ) : (
               <Button
                 asChild
-                className={cn("bg-lime-700 px-8 hover:bg-lime-700/70")}
+                className={cn("bg-lime-700 px-3 hover:bg-lime-700/70 py-1.5")}
               >
                 <Link href="/login">Sign In</Link>
               </Button>

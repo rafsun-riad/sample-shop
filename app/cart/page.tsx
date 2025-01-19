@@ -5,11 +5,12 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useCartStore } from "@/store";
+import { useCartStore, useUserStore } from "@/store";
 import { useRouter } from "next/navigation";
 
 function CartPage() {
   const router = useRouter();
+  const { user } = useUserStore((state) => state);
   const {
     cart,
     removeFromCart,
@@ -30,6 +31,11 @@ function CartPage() {
   }
 
   function handleConfirmOrder() {
+    if (!user) {
+      alert("Please sign in to confirm order.");
+      router.push("/login");
+      return;
+    }
     if (cart.length === 0) {
       alert("No items in the cart to confirm order.");
       return;

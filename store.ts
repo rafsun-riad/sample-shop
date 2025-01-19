@@ -1,19 +1,47 @@
 import { create } from "zustand";
 
+// user store
+
+function getStoredUser() {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    return JSON.parse(storedUser);
+  } else {
+    return null;
+  }
+}
+
 export const useUserStore = create((set) => ({
-  user: {},
+  user: getStoredUser(),
   userLogin: (data) => {
-    console.log("store", data);
-    set({ user: data });
+    set(() => {
+      localStorage.setItem("user", JSON.stringify(data));
+      return { user: data };
+    });
+  },
+  userLogout: () => {
+    set(() => {
+      localStorage.removeItem("user");
+      return { user: null };
+    });
   },
 }));
 
+// const storedUser = localStorage.getItem("user");
+// if (storedUser) {
+//   useUserStore.setState({ user: JSON.parse(storedUser) });
+// } else {
+//   useUserStore.setState({ user: null });
+// }
+
+// cart store
 export const useCartStore = create((set) => ({
   cart: [],
   addToCart: (item) =>
     set((state) => {
       const foundItem = state.cart.find((cartItem) => cartItem.id === item.id);
       if (foundItem) {
+        alert("Item is already in the cart");
         return { cart: [...state.cart] };
       }
       return {

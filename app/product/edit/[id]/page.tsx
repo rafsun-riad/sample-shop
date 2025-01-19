@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-// import { useUserStore } from "@/store";
+import { useUserStore } from "@/store";
 import { useRouter, useParams } from "next/navigation";
 import { updateProduct, getProduct } from "@/app/_service/apiService";
 
 export default function ProductEditPage() {
+  const { user: userData } = useUserStore((state) => state);
   const [user, setUser] = useState("");
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -53,6 +54,13 @@ export default function ProductEditPage() {
     router.push(`/product/${id}`);
   }
 
+  if (!userData) {
+    return (
+      <h2 className="text-center text-2xl my-10">
+        Please login to edit product.
+      </h2>
+    );
+  }
   return (
     <form
       onSubmit={handleSubmit}

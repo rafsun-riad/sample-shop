@@ -34,6 +34,13 @@ export default function ProductAddPage() {
     });
     router.push("/");
   }
+  if (!user) {
+    return (
+      <h3 className="text-center text-2xl my-10">
+        Please sign in to create a new product.
+      </h3>
+    );
+  }
 
   return (
     <form
