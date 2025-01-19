@@ -10,10 +10,11 @@ import {
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useUserStore } from "@/store";
+import { useCartStore, useUserStore } from "@/store";
 
 function Header() {
   const { user } = useUserStore((state) => state);
+  const cart = useCartStore((state) => state.cart);
   return (
     <div className=" bg-slate-700 min-w-full py-5 fixed top-0 z-50 shadow-md">
       <div className="flex items-center container mx-auto justify-between">
@@ -59,7 +60,9 @@ function Header() {
           <div>
             <Link href="/cart" className="flex items-center gap-1 relative">
               <ShoppingCart />
-              <span className=" absolute -top-3 right-0 text-xs">0</span>
+              <span className=" absolute -top-3 right-0 text-xs">
+                {cart.length}
+              </span>
             </Link>
           </div>
           <div>

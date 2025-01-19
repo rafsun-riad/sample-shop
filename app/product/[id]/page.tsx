@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { getProduct } from "@/app/_service/apiService";
+import Link from "next/link";
+import DeleteButton from "@/app/_components/DeleteButton";
+import AddToCartButton from "@/app/_components/AddToCartButton";
 
 async function ProductDetails({ params }) {
   const { id } = await params;
   const product = await getProduct(id);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid md:grid-cols-2 gap-8">
@@ -34,13 +38,13 @@ async function ProductDetails({ params }) {
           </div>
 
           <p className="text-gray-600">{product.description}</p>
+          <AddToCartButton product={product} />
 
-          <Button
-            className={cn("w-full md:w-auto px-8 hover:bg-gray-700")}
-            size="lg"
-          >
-            ADD TO CART
+          <Button className={cn(" mx-3")} size="lg" asChild variant="outline">
+            <Link href={`/product/edit/${id}`}>Edit Product</Link>
           </Button>
+
+          <DeleteButton id={id} />
         </div>
       </div>
     </div>

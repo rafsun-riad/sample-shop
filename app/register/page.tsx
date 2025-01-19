@@ -27,7 +27,12 @@ export default function SignUpForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (password !== confirmPassword) return;
+    if (password !== confirmPassword) {
+      alert(
+        "Passwords do not match! Password and Confirm Password must be the same"
+      );
+      return;
+    }
     const userData = await register({ fullName, email, password });
     userLogin(userData);
     if (userData?.name) router.push("/");

@@ -39,7 +39,6 @@ export async function getProduct(id) {
 }
 
 export async function createProduct(data) {
-  console.log(data);
   try {
     const response = await axios.post(`${BASE_URL}/api/product`, data, {
       headers: { "Content-Type": "application/json" },
@@ -47,5 +46,25 @@ export async function createProduct(data) {
     return response.data.product;
   } catch (error) {
     throw new Error(`Failed to create product: ${error.message}`);
+  }
+}
+
+export async function updateProduct(id, data) {
+  try {
+    const response = await axios.put(`${BASE_URL}/api/product/${id}`, data, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data.product;
+  } catch (error) {
+    throw new Error(`Failed to update product: ${error.message}`);
+  }
+}
+
+export async function deleteProduct(id) {
+  try {
+    const response = await axios.delete(`${BASE_URL}/api/product/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Failed to delete product: ${error.message}`);
   }
 }
